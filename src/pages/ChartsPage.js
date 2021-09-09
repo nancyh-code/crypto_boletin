@@ -8,8 +8,10 @@ import VolumeChart from '../components/VolumeChart'
 
 //Hay que transformar la data de array a objeto para poder usar la librería de graficos
 const formatData = data => {
+  console.log(data);
   return data.map((coord) => {
     return {
+
       t: coord[0],
       y: coord[1]
     }

@@ -9,14 +9,17 @@ export const cryptoSlice = createSlice({
     SET_CRYPTO: (state, action) => {
       state.crypto = action.payload
     },
-    ///Ambos reducer manejan lo mismo, se colocaron nombres diferentes para observar mejor la acción
+    ADD_CRYPTO: (state, action) => {
+      state.crypto = action.payload
+    },
+    ///Los reducer manejan lo mismo, se colocaron nombres diferentes para observar mejor la acción
     DELETE_CRYPTO: (state, action) => {
       state.crypto = action.payload
     }
   }
 })
 
-export const { SET_CRYPTO, DELETE_CRYPTO } = cryptoSlice.actions
+export const { SET_CRYPTO, DELETE_CRYPTO, ADD_CRYPTO } = cryptoSlice.actions
 export const selectCrypto = (state) => state.crypto.crypto
 
 export default cryptoSlice.reducer

@@ -5,6 +5,7 @@ import { styled } from '@material-ui/core/'
 import { useSelector } from 'react-redux'
 import { selectCrypto } from '../features/CryptoSlice'
 import CoinRow from '../components/CoinRow/CoinRow'
+import AddCoin from '../components/AddCoin'
 
 
 const HeaderCell = styled(TableCell)({
@@ -33,7 +34,7 @@ const HomePage = () => {
         })
         setCoins(response.data)
         setIsLoading(false)
-        console.log('coins:', coins);
+        //console.log('coins:', coins);
 
       } catch (err) { console.log(err) }
     }
@@ -41,7 +42,7 @@ const HomePage = () => {
       fetchData()
     } else {
       setCoins([])
-      //setCoins('')
+
     }
 
   }, [crypto])
@@ -52,27 +53,31 @@ const HomePage = () => {
         isLoading ? (
           <h1>Loading...</h1>
         ) : (
-          <TableContainer component={Paper}>
-            <Table size='small' aria-label="a dense table">
-              <TableHead>
-                <TableRow>
-                  <HeaderCell>Image</HeaderCell>
-                  <HeaderCell >Symbol</HeaderCell>
-                  <HeaderCell>Current-Price</HeaderCell>
-                  <HeaderCell>MktCap-Rank</HeaderCell>
-                  <HeaderCell>High-Price-24h</HeaderCell>
-                  <HeaderCell>Low-Price-24h</HeaderCell>
-                  <HeaderCell>Charts</HeaderCell>
-                  <HeaderCell>Price-1day-%</HeaderCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {coins.map(coin => (
-                  <CoinRow key={coin.id} data={coin} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <>
+            <AddCoin />
+            <TableContainer component={Paper}>
+              <Table size='small' aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <HeaderCell>Image</HeaderCell>
+                    <HeaderCell >Symbol</HeaderCell>
+                    <HeaderCell>Current-Price</HeaderCell>
+                    <HeaderCell>MktCap-Rank</HeaderCell>
+                    <HeaderCell>High-Price-24h</HeaderCell>
+                    <HeaderCell>Low-Price-24h</HeaderCell>
+                    <HeaderCell>Charts</HeaderCell>
+                    <HeaderCell>Price-1day-%</HeaderCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {coins.map(coin => (
+                    <CoinRow key={coin.id} data={coin} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+          </>
         )
       }
 

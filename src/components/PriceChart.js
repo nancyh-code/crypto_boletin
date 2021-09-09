@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core'
 import { Line } from 'react-chartjs-2'
 import { chartOptions } from '../chartOptions'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_FREQ, selectFreq } from '../features/FreqSlice'
 
 
 const PriceChart = ({ prices: { dailyPrices, weeklyPrices, yearlyPrices }, id }) => {
-  const [freq, setFreq] = useState('24h')
+  const freq = useSelector(selectFreq)
+  const dispatch = useDispatch()
+  let frequency
 
-  //console.log('dailyPricesDesdeChart:', dailyPrices);
+  switch (freq) {
+    case '24h':
+      frequency = dailyPrices;
+      break;
+    case '7d':
+      frequency = weeklyPrices;
+      break;
+    case '365d':
+      frequency = yearlyPrices;
+      break;
+  }
 
   return (
     <div>
@@ -20,14 +33,15 @@ const PriceChart = ({ prices: { dailyPrices, weeklyPrices, yearlyPrices }, id })
           backgroundColor: 'rgba(255,99,132,0.30)',
           borderColor: '#F85F73',
           pointStyle: 'circle',
-          data: freq === '24h' ? dailyPrices : freq === '7d' ? weeklyPrices : yearlyPrices
+          data: frequency
+          
         }]
       }}
         width={800} height={350} options={chartOptions}
       />
-      <Button variant="outlined" onClick={() => setFreq('24h')}>24h</Button>
-      <Button variant="outlined" onClick={() => setFreq('7d')}>1week</Button>
-      <Button variant="outlined" onClick={() => setFreq('365')}>1year</Button>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('24h'))}>24h</Button>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('7d'))}>1week</Button>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('365d'))}>1year</Button>
     </div>
   )
 }
