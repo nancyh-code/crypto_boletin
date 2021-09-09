@@ -34,9 +34,6 @@ const VolumeChart = ({ volumes: { dailyVolumes, weeklyVolumes, yearlyVolumes }, 
       }}
         width={800} height={350} options={chartOptions}
       />
-      <Button variant="outlined">24h</Button>
-      <Button variant="outlined">1week</Button>
-      <Button variant="outlined">1year</Button>
     </div>
   )
 }

@@ -25,6 +25,9 @@ const PriceChart = ({ prices: { dailyPrices, weeklyPrices, yearlyPrices }, id })
 
   return (
     <div>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('24h'))}>24h</Button>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('7d'))}>1week</Button>
+      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('365d'))}>1year</Button>
       <Line data={{
         labels: [],
         datasets: [{
@@ -34,14 +37,12 @@ const PriceChart = ({ prices: { dailyPrices, weeklyPrices, yearlyPrices }, id })
           borderColor: '#F85F73',
           pointStyle: 'circle',
           data: frequency
-          
+
         }]
       }}
         width={800} height={350} options={chartOptions}
       />
-      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('24h'))}>24h</Button>
-      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('7d'))}>1week</Button>
-      <Button variant="outlined" onClick={() => dispatch(SET_FREQ('365d'))}>1year</Button>
+
     </div>
   )
 }
